@@ -1,0 +1,14 @@
+# put your python code here
+a = int(input())
+b = int(input())
+i = 0
+s = 0
+k = 0
+while a + i <= b:
+    if (a + i) % 3 == 0:
+        s = s + a + i
+        k += 1
+    else:
+        pass
+    i += 1
+print(s/k)
