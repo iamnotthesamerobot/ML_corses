@@ -1,0 +1,16 @@
+# put your python code here
+a = int(input())
+b = int(input())
+i1 = 1
+while i1 <= 100:
+    c = a * i1
+    i2 = 1
+    while i2 <= 100:
+        d = b * i2
+        if d == c:
+            print(d)
+            break
+        i2 += 1
+    i1 += 1
+    if d == c:
+        break
