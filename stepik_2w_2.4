@@ -1,0 +1,22 @@
+#g = input()
+g = 'rhhhfjjjjjhuhh'
+g = g + '.'
+i = 0
+j = 1
+while j <= len(g) - 1:
+    if g[i] == g[j] and j <= len(g):
+        k = 1
+        while g[i] == g[j]:
+            k += 1 # counter
+            j += 1
+            if j == len(g):
+                break
+        print(g[i] + str(k), end='')
+        i = j
+        j = i + 1
+    elif g[i] != g[j] and j <= len(g):
+        print(g[i] + '1', end='')
+        i += 1
+        j += 1
+    else:
+        print(g[i])
