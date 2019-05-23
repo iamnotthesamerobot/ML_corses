@@ -1,0 +1,3 @@
+# put your python code here
+a = input()
+print((a.lower().count('g') + a.lower().count('c'))/len(a)*100)
