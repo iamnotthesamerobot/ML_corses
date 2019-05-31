@@ -1,0 +1,23 @@
+"""
+Напишите программу, которая считывает из файла строку, соответствующую тексту, сжатому с помощью кодирования повторов,
+и производит обратную операцию, получая исходный текст.
+"""
+string = 'm2T11j6B20Y16R5Z19D3g12O8s1m1U6V11O7g2q7R19i20L14w1Y2R13J1b17O2b19w7Q3e4k4Y14N14A13N16'
+n = []
+for i in range(len(string)):
+    if string[i].isdigit(): #5
+        continue
+    if string[i].isalpha():
+        if i+1 == len(string):                              #...a#
+            print(string[i], end='')
+        elif i+1 < len(string) and string[i+1].isalpha():   #...ab#
+            print(string[i], end='')
+        elif i+1 < len(string) and string[i+1].isdigit():       #...a5#
+            if i + 2 >= len(string) or string[i+2].isalpha() and i+2 < len(string):   #...a5a# or #...a5#
+                for j in range(int(string[i+1])):
+                    print(string[i], end='')
+            elif i + 2 < len(string) and string[i+2].isdigit():   #...a55#
+                n = string[i+1], string[i+2]
+                n = ''.join(n)
+                for k in range(int(n)):
+                    print(string[i], end='')
