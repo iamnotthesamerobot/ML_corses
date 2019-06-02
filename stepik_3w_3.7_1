@@ -1,0 +1,98 @@
+"""
+Напишите программу, которая принимает на стандартный вход список игр футбольных команд с результатом матча и выводит на стандартный вывод сводную таблицу результатов всех матчей.
+За победу команде начисляется 3 очка, за поражение — 0, за ничью — 1.
+Формат ввода следующий:
+В первой строке указано целое число n
+— количество завершенных игр.
+После этого идет n строк, в которых записаны результаты игры в следующем формате:
+Первая_команда;Забито_первой_командой;Вторая_команда;Забито_второй_командой
+Вывод программы необходимо оформить следующим образом:
+Команда:Всего_игр Побед Ничьих Поражений Всего_очков
+Порядок вывода команд произвольный.
+"""
+from collections import defaultdict
+
+games_count = int(input())
+
+all_results = defaultdict(list)
+
+for i in range(games_count):
+    match_result = input().strip().split(';')
+    # Scores
+    if match_result[1] == match_result[3]:
+        game_1 = 1
+        game_3 = 1
+        vic_1 = 0
+        vic_3 = 0
+        draw_1 = 1
+        draw_3 = 1
+        lost_1 = 0
+        lost_3 = 0
+        score_1 = 1
+        score_4 = 1
+    elif match_result[1] > match_result[3]:
+        game_1 = 1
+        game_3 = 1
+        vic_1 = 1
+        vic_3 = 0
+        draw_1 = 0
+        draw_3 = 0
+        lost_1 = 0
+        lost_3 = 1
+        score_1 = 3
+        score_4 = 0
+    elif match_result[1] < match_result[3]:
+        game_1 = 1
+        game_3 = 1
+        vic_1 = 0
+        vic_3 = 1
+        draw_1 = 0
+        draw_3 = 0
+        lost_1 = 1
+        lost_3 = 0
+        score_1 = 0
+        score_4 = 3
+
+    if match_result[0] in all_results:
+        g = int(all_results[match_result[0]][0]) # extract game_1 val
+        v = int(all_results[match_result[0]][1]) # extract vic_1 val
+        d = int(all_results[match_result[0]][2])  # extract draw_1 val
+        l = int(all_results[match_result[0]][3])  # extract lost_1 val
+        s = int(all_results[match_result[0]][4])  # extract score_1 val
+        b = all_results.pop([match_result[0]][0])
+        all_results[match_result[0]].append(g + game_1)
+        all_results[match_result[0]].append(v + vic_1)
+        all_results[match_result[0]].append(d + draw_1)
+        all_results[match_result[0]].append(l + lost_1)
+        all_results[match_result[0]].append(s + score_1)
+
+    else:
+        all_results[match_result[0]].append(game_1)
+        all_results[match_result[0]].append(vic_1)
+        all_results[match_result[0]].append(draw_1)
+        all_results[match_result[0]].append(lost_1)
+        all_results[match_result[0]].append(score_1)
+
+    if match_result[2] in all_results:
+        g = int(all_results[match_result[2]][0])  # extract game val
+        v = int(all_results[match_result[2]][1])  # extract vic val
+        d = int(all_results[match_result[2]][2])  # extract draw val
+        l = int(all_results[match_result[2]][3])  # extract lost val
+        s = int(all_results[match_result[2]][4])  # extract score val
+        b = all_results.pop([match_result[2]][0])
+        all_results[match_result[2]].append(g + game_3)
+        all_results[match_result[2]].append(v + vic_3)
+        all_results[match_result[2]].append(d + draw_3)
+        all_results[match_result[2]].append(l + lost_3)
+        all_results[match_result[2]].append(s + score_4)
+
+    else:
+        all_results[match_result[2]].append(game_3)
+        all_results[match_result[2]].append(vic_3)
+        all_results[match_result[2]].append(draw_3)
+        all_results[match_result[2]].append(lost_3)
+        all_results[match_result[2]].append(score_4)
+
+for team in all_results:
+    print(team + ':', all_results[team][0], all_results[team][1], all_results[team][2],
+          all_results[team][3], all_results[team][4])
