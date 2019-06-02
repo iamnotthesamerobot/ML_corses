@@ -1,0 +1,19 @@
+"""
+Через стандартный ввод подаётся следующая структура: первой строкой — количество d записей в списке известных слов, после 
+передаётся  d строк с одним словарным словом на строку, затем — количество l строк текста, после чего — l строк текста.
+Напишите программу, которая выводит слова из текста, которые не встречаются в словаре. Регистр слов не учитывается. 
+Порядок вывода слов произвольный. Слова, не встречающиеся в словаре, не должны повторяться в выводе программы.
+"""
+dict_counter = int(input())
+dictionary = [input().lower() for word in range(dict_counter)]
+text = []
+not_in_dict = []
+text_counter = int(input())
+[text.extend(input().lower().split()) for word in range(text_counter)]
+
+for i in range(len(text)):
+    if text[i] not in dictionary:
+        not_in_dict.append(text[i])
+
+for word in set(not_in_dict):
+    print(word)
